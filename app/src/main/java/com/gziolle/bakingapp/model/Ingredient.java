@@ -7,26 +7,26 @@ package com.gziolle.bakingapp.model;
  */
 
 public class Ingredient {
-    private int mQuantity;
-    private String mMeasure;
-    private String mIngredientName;
+    private double quantity;
+    private String measure;
+    private String ingredientName;
 
 
     public Ingredient(int quantity, String measure, String ingredientName) {
-        this.mQuantity = quantity;
-        this.mMeasure = measure;
-        this.mIngredientName = ingredientName;
+        this.quantity = quantity;
+        this.measure = measure;
+        this.ingredientName = ingredientName;
     }
 
-    public int getQuantity() {
-        return mQuantity;
+    public double getQuantity() {
+        return quantity;
     }
 
     public String getMeasure() {
-        return mMeasure;
+        return measure;
     }
 
     public String getIngredientName() {
-        return mIngredientName;
+        return ingredientName;
     }
 }

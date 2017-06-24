@@ -9,43 +9,43 @@ import java.util.List;
  */
 
 public class Recipe {
-    private long mId;
-    private String mName;
-    private List<Ingredient> mIngredients;
-    private List<Step> mSteps;
-    private int mServings;
-    private String mImageUrl;
+    long id;
+    String name;
+    List<Ingredient> ingredients;
+    List<Step> steps;
+    int servings;
+    String imageUrl;
 
     public Recipe(long mId, String mName, List<Ingredient> mIngredients, List<Step> mSteps, int mServings, String mImageUrl) {
-        this.mId = mId;
-        this.mName = mName;
-        this.mIngredients = mIngredients;
-        this.mSteps = mSteps;
-        this.mServings = mServings;
-        this.mImageUrl = mImageUrl;
+        this.id = mId;
+        this.name = mName;
+        this.ingredients = mIngredients;
+        this.steps = mSteps;
+        this.servings = mServings;
+        this.imageUrl = mImageUrl;
     }
 
     public long getId() {
-        return mId;
+        return id;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public List<Ingredient> getIngredients() {
-        return mIngredients;
+        return ingredients;
     }
 
     public List<Step> getSteps() {
-        return mSteps;
+        return steps;
     }
 
     public int getServings() {
-        return mServings;
+        return servings;
     }
 
     public String getImageUrl() {
-        return mImageUrl;
+        return imageUrl;
     }
 }

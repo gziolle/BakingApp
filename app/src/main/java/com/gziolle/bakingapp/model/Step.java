@@ -7,37 +7,37 @@ package com.gziolle.bakingapp.model;
  */
 
 public class Step {
-    private long mId;
-    private String mShortDescription;
-    private String mDescription;
-    private String mVideoUrl;
-    private String mThumbnailUrl;
+    long id;
+    String shortDescription;
+    String description;
+    String videoUrl;
+    String thumbnailUrl;
 
     public Step(long id, String shortDescription, String description, String videoUrl, String thumbnailUrl) {
-        this.mId = id;
-        this.mShortDescription = shortDescription;
-        this.mDescription = description;
-        this.mVideoUrl = videoUrl;
-        this.mThumbnailUrl = thumbnailUrl;
+        this.id = id;
+        this.shortDescription = shortDescription;
+        this.description = description;
+        this.videoUrl = videoUrl;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public long getId() {
-        return mId;
+        return id;
     }
 
     public String getShortDescription() {
-        return mShortDescription;
+        return shortDescription;
     }
 
     public String getDescription() {
-        return mDescription;
+        return description;
     }
 
     public String getVideoUrl() {
-        return mVideoUrl;
+        return videoUrl;
     }
 
     public String getThumbnailUrl() {
-        return mThumbnailUrl;
+        return thumbnailUrl;
     }
 }
