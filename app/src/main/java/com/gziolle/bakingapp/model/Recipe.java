@@ -1,6 +1,9 @@
 package com.gziolle.bakingapp.model;
 
-import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 
 /**
  * BakingApp
@@ -8,15 +11,28 @@ import java.util.List;
  * gziolle@gmail.com
  */
 
-public class Recipe {
-    long id;
-    String name;
-    List<Ingredient> ingredients;
-    List<Step> steps;
-    int servings;
-    String imageUrl;
+public class Recipe implements Parcelable {
+    private long id;
+    private String name;
+    ArrayList<Ingredient> ingredients;
+    ArrayList<Step> steps;
+    private int servings;
+    private String imageUrl;
 
-    public Recipe(long mId, String mName, List<Ingredient> mIngredients, List<Step> mSteps, int mServings, String mImageUrl) {
+    private Recipe(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+
+        this.ingredients = new ArrayList<Ingredient>();
+        in.readTypedList(this.ingredients, Ingredient.CREATOR);
+        this.steps = new ArrayList<Step>();
+        in.readTypedList(this.steps, Step.CREATOR);
+
+        this.servings = in.readInt();
+        this.imageUrl = in.readString();
+    }
+
+    public Recipe(long mId, String mName, ArrayList<Ingredient> mIngredients, ArrayList<Step> mSteps, int mServings, String mImageUrl) {
         this.id = mId;
         this.name = mName;
         this.ingredients = mIngredients;
@@ -33,11 +49,11 @@ public class Recipe {
         return name;
     }
 
-    public List<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public List<Step> getSteps() {
+    public ArrayList<Step> getSteps() {
         return steps;
     }
 
@@ -48,4 +64,29 @@ public class Recipe {
     public String getImageUrl() {
         return imageUrl;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(getId());
+        dest.writeString(getName());
+        dest.writeTypedList(getIngredients());
+        dest.writeTypedList(getSteps());
+        dest.writeInt(getServings());
+        dest.writeString(getImageUrl());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
+        }
+
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
 }
