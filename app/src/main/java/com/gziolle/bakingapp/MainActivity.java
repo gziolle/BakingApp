@@ -7,6 +7,7 @@ package com.gziolle.bakingapp;
  */
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -17,13 +18,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.gziolle.bakingapp.model.Recipe;
+import com.gziolle.bakingapp.util.NetworkUtils;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Recipe>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Recipe>>,
+        RecipeAdapter.GridItemClickListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int RECIPE_LOADER_ID = 101;
+
+    public static final String RECIPES = "recipes";
+    public static final String STEPS = "steps";
+    public static final String INGREDIENTS = "ingredients";
 
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
@@ -40,8 +47,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mGridLayoutManager = new GridLayoutManager(this, 1);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
-        mRecipes = new ArrayList<>();
-        mRecipeAdapter = new RecipeAdapter(this, mRecipes);
+        if (savedInstanceState != null) {
+            mRecipes = savedInstanceState.getParcelableArrayList(RECIPES);
+        } else {
+            mRecipes = new ArrayList<>();
+        }
+
+        mRecipeAdapter = new RecipeAdapter(this, mRecipes, this);
         mRecyclerView.setAdapter(mRecipeAdapter);
 
     }
@@ -56,15 +68,34 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
+    @Override
+    public void onItemSelected(int position) {
+        Recipe recipe = mRecipes.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(INGREDIENTS, recipe.getIngredients());
+        bundle.putParcelableArrayList(STEPS, recipe.getSteps());
+
+        Intent intent = new Intent(this, RecipeActivity.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
+
     /*
-    * Displays the progress dialog to inform the user that movies are being loaded.
-    * */
+        * Displays the progress dialog to inform the user that movies are being loaded.
+        * */
     private void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
         }
         mProgressDialog.setMessage(getString(R.string.progress_dialog_loading));
         mProgressDialog.show();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(RECIPES, mRecipes);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

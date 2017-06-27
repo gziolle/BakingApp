@@ -24,9 +24,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     private Context mContext;
     private ArrayList<Recipe> mRecipes;
 
-    public RecipeAdapter(Context context, ArrayList<Recipe> recipes) {
+    private final GridItemClickListener mClickListener;
+
+    interface GridItemClickListener {
+        void onItemSelected(int position);
+    }
+
+    public RecipeAdapter(Context context, ArrayList<Recipe> recipes, GridItemClickListener clickListener) {
         this.mContext = context;
         this.mRecipes = recipes;
+        this.mClickListener = clickListener;
     }
 
     @Override
@@ -52,7 +59,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         return mRecipes.get(position);
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder {
+    class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView mRecipeImage;
         private TextView mRecipeTitle;
 
@@ -60,6 +67,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             super(itemView);
             mRecipeImage = (ImageView) itemView.findViewById(R.id.ivRecipeImage);
             mRecipeTitle = (TextView) itemView.findViewById(R.id.tvRecipeTitle);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mClickListener.onItemSelected(getAdapterPosition());
         }
     }
 }
