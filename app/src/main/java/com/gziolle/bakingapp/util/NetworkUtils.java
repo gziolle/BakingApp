@@ -1,4 +1,4 @@
-package com.gziolle.bakingapp;
+package com.gziolle.bakingapp.util;
 
 /**
  * BakingApp
