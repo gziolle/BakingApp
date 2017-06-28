@@ -98,9 +98,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mRecipes = savedInstanceState.getParcelableArrayList(Utils.RECIPES_EXTRA);
+    }
+
     /*
-    * Determines how many columns will be displayed in the RecycleView.
-    * */
+        * Determines how many columns will be displayed in the RecycleView.
+        * */
     public int calculateSpanCount() {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float dpWidth = metrics.widthPixels / metrics.density;
@@ -132,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (data != null && data.size() != 0) {
             mRecipes.addAll(data);
             mRecipeAdapter.notifyDataSetChanged();
+        } else {
+
         }
     }
 
