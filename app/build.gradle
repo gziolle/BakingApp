@@ -33,6 +33,7 @@ dependencies {
     //Third-party libraries
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.google.android.exoplayer:exoplayer:r2.2.0'
 
     testCompile 'junit:junit:4.12'
 }

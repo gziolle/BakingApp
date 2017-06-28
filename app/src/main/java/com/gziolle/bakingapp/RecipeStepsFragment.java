@@ -101,6 +101,6 @@ public class RecipeStepsFragment extends Fragment implements RecipeStepsAdapter.
 
     @Override
     public void onStepClicked(int position) {
-
+        mCallbackListener.onStepSelected(position);
     }
 }

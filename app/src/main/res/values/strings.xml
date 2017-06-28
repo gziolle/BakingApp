@@ -4,4 +4,6 @@
 
     <string name="recipe_ingredients">Recipe Ingredients</string>
     <string name="recipe_steps">Steps</string>
+
+    <string name="step_progress">%1$d / %2$d</string>
 </resources>
