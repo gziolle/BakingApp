@@ -19,7 +19,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
     private ArrayList<Step> mSteps;
     private boolean mTwoPane;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +53,11 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
     @Override
     public void onStepSelected(int position) {
         if (mTwoPane) {
-
+            StepDetailsInnerFragment fragment = new StepDetailsInnerFragment();
+            fragment.addStep(mSteps.get(position));
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.step_details_container, fragment)
+                    .commit();
         } else {
             Intent intent = new Intent(this, StepDetailsActivity.class);
             intent.putParcelableArrayListExtra(Utils.STEPS_EXTRA, mSteps);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:layout_margin="8dp" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/stepDescriptionCard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/tvStepDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAlignment="center"
+            tools:text="Baking and shaking all the way down to Massachusetts Baking and shaking all the way down to Massachusetts Baking and shaking all the way down to Massachusetts Baking and shaking all the way down to MassachusettsBaking and shaking all the way down to Massachusetts" />
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

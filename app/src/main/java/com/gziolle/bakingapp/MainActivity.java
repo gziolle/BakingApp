@@ -15,6 +15,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.gziolle.bakingapp.model.Recipe;
@@ -29,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int RECIPE_LOADER_ID = 101;
 
-
-
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
     private ArrayList<Recipe> mRecipes;
@@ -39,11 +38,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int spanCount = calculateSpanCount();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recipeRecyclerView);
-        mGridLayoutManager = new GridLayoutManager(this, 1);
+        mGridLayoutManager = new GridLayoutManager(this, spanCount);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
         if (savedInstanceState != null) {
@@ -97,6 +98,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onSaveInstanceState(outState);
     }
 
+    /*
+    * Determines how many columns will be displayed in the RecycleView.
+    * */
+    public int calculateSpanCount() {
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float dpWidth = metrics.widthPixels / metrics.density;
+        return (int) (dpWidth / 266);
+    }
+
     @Override
     public Loader<ArrayList<Recipe>> onCreateLoader(int id, Bundle args) {
 
@@ -128,4 +138,5 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader loader) {
     }
+
 }

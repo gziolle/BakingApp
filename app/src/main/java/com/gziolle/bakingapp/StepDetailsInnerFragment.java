@@ -36,6 +36,7 @@ public class StepDetailsInnerFragment extends Fragment {
     private SimpleExoPlayer mExoPlayer;
     private SimpleExoPlayerView mExoPlayerView;
     private TextView mDescriptionTextView;
+    private TextView noVideoTextView;
 
     public StepDetailsInnerFragment() {
     }
@@ -44,20 +45,25 @@ public class StepDetailsInnerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_step_details_inner, container, false);
-
-        mDescriptionTextView = (TextView) rootView.findViewById(R.id.tvStepDescription);
         mExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
+        noVideoTextView = (TextView) rootView.findViewById(R.id.tvNoVideo);
+
 
         if (mStep != null) {
-            addDescriptionToView(mStep.getDescription());
             String videoUrl = mStep.getVideoUrl();
-            if (videoUrl != null && !"".equals(videoUrl))
+            if (videoUrl != null && !("").equals(videoUrl))
                 initializeVideoPlayer(mStep.getVideoUrl());
             else {
                 mExoPlayerView.setVisibility(View.GONE);
+                if (noVideoTextView != null) {
+                    noVideoTextView.setVisibility(View.VISIBLE);
+                }
+            }
+            if (rootView.findViewById(R.id.stepDescriptionCard) != null) {
+                mDescriptionTextView = (TextView) rootView.findViewById(R.id.tvStepDescription);
+                addDescriptionToView(mStep.getDescription());
             }
         }
-
         return rootView;
     }
 

@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by Guilherme Ziolle on 24/06/2017.
  * gziolle@gmail.com
  */
-//TODO Search for ViewPager for StepDetailsFragment
+
 public class StepDetailsActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = StepDetailsActivity.class.getSimpleName();
@@ -35,25 +35,29 @@ public class StepDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_details);
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            if (intent.hasExtra(Utils.STEPS_EXTRA) && intent.hasExtra(Utils.SELECTED_STEP_EXTRA)) {
-                mSteps = intent.getParcelableArrayListExtra(Utils.STEPS_EXTRA);
-                mCurrentStep = intent.getIntExtra(Utils.SELECTED_STEP_EXTRA, 0);
-
-                StepDetailsInnerFragment fragment = new StepDetailsInnerFragment();
-                fragment.addStep(mSteps.get(mCurrentStep));
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.innerContainer, fragment)
-                        .commit();
-                TextView stepProgressTextView = (TextView) findViewById(R.id.tvStepProgress);
-                stepProgressTextView.setText(
-                        Utils.formatProgressString(this, mCurrentStep, mSteps.size()));
+        if (savedInstanceState != null) {
+            mSteps = savedInstanceState.getParcelableArrayList(Utils.STEPS_EXTRA);
+            mCurrentStep = savedInstanceState.getInt(Utils.SELECTED_STEP_EXTRA);
+        } else {
+            Intent intent = getIntent();
+            if (intent != null) {
+                if (intent.hasExtra(Utils.STEPS_EXTRA) && intent.hasExtra(Utils.SELECTED_STEP_EXTRA)) {
+                    mSteps = intent.getParcelableArrayListExtra(Utils.STEPS_EXTRA);
+                    mCurrentStep = intent.getIntExtra(Utils.SELECTED_STEP_EXTRA, 0);
+                }
             }
+        }
 
-            final ImageView nextImageView = (ImageView) findViewById(R.id.nextButton);
-            final ImageView previousImageView = (ImageView) findViewById(R.id.previousButton);
+        StepDetailsInnerFragment fragment = new StepDetailsInnerFragment();
+        fragment.addStep(mSteps.get(mCurrentStep));
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.innerContainer, fragment)
+                .commit();
 
+        final ImageView nextImageView = (ImageView) findViewById(R.id.nextButton);
+        final ImageView previousImageView = (ImageView) findViewById(R.id.previousButton);
+
+        if (nextImageView != null) {
             nextImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -85,8 +89,15 @@ public class StepDetailsActivity extends AppCompatActivity {
                     replaceStep();
                 }
             });
+
+        }
+        TextView stepProgressTextView = (TextView) findViewById(R.id.tvStepProgress);
+        if (stepProgressTextView != null) {
+            stepProgressTextView.setText(
+                    Utils.formatProgressString(this, mCurrentStep + 1, mSteps.size()));
         }
     }
+
 
     private void replaceStep() {
         TextView stepProgressTextView = (TextView) findViewById(R.id.tvStepProgress);
@@ -98,4 +109,13 @@ public class StepDetailsActivity extends AppCompatActivity {
                 .replace(R.id.innerContainer, fragment)
                 .commit();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(Utils.STEPS_EXTRA, mSteps);
+        outState.putInt(Utils.SELECTED_STEP_EXTRA, mCurrentStep);
+        super.onSaveInstanceState(outState);
+
+    }
+
 }

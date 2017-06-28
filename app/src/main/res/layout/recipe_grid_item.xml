@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_gravity="center"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/recipe_grid_item_width"
     android:layout_height="@dimen/recipe_grid_item_height"
     android:layout_marginTop="@dimen/recipe_grid_item_margin"
     android:layout_marginBottom="@dimen/recipe_grid_item_margin"
@@ -12,7 +12,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivRecipeImage"
