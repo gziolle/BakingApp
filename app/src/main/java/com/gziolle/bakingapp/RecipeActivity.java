@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.gziolle.bakingapp.model.Ingredient;
 import com.gziolle.bakingapp.model.Step;
+import com.gziolle.bakingapp.util.Utils;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,9 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
 
     private static final String LOG_TAG = RecipeActivity.class.getSimpleName();
 
+    private ArrayList<Step> mSteps;
     private boolean mTwoPane;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +29,11 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
         Bundle bundle = intent.getExtras();
 
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        ArrayList<Step> steps = new ArrayList<>();
+        mSteps = new ArrayList<>();
 
         if (bundle != null) {
-            ingredients = bundle.getParcelableArrayList(MainActivity.INGREDIENTS);
-            steps = bundle.getParcelableArrayList(MainActivity.STEPS);
+            ingredients = bundle.getParcelableArrayList(Utils.INGREDIENTS_EXTRA);
+            mSteps = bundle.getParcelableArrayList(Utils.STEPS_EXTRA);
         }
 
         if (findViewById(R.id.step_details_container) != null) {
@@ -38,7 +41,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
 
             if (savedInstanceState == null) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                StepDetailsFragment stepsFragment = new StepDetailsFragment();
             }
         } else {
             mTwoPane = false;
@@ -46,7 +48,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
 
         RecipeStepsFragment stepsFragment = (RecipeStepsFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.recipe_steps_fragment);
-        stepsFragment.update(ingredients, steps);
+        stepsFragment.update(ingredients, mSteps);
     }
 
     @Override
@@ -54,7 +56,10 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
         if (mTwoPane) {
 
         } else {
-
+            Intent intent = new Intent(this, StepDetailsActivity.class);
+            intent.putParcelableArrayListExtra(Utils.STEPS_EXTRA, mSteps);
+            intent.putExtra(Utils.SELECTED_STEP_EXTRA, position);
+            startActivity(intent);
         }
     }
 }

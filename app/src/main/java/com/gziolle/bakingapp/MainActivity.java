@@ -19,6 +19,7 @@ import android.util.Log;
 
 import com.gziolle.bakingapp.model.Recipe;
 import com.gziolle.bakingapp.util.NetworkUtils;
+import com.gziolle.bakingapp.util.Utils;
 
 import java.util.ArrayList;
 
@@ -28,9 +29,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int RECIPE_LOADER_ID = 101;
 
-    public static final String RECIPES = "recipes";
-    public static final String STEPS = "steps";
-    public static final String INGREDIENTS = "ingredients";
+
 
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
         if (savedInstanceState != null) {
-            mRecipes = savedInstanceState.getParcelableArrayList(RECIPES);
+            mRecipes = savedInstanceState.getParcelableArrayList(Utils.RECIPES_EXTRA);
         } else {
             mRecipes = new ArrayList<>();
         }
@@ -72,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onItemSelected(int position) {
         Recipe recipe = mRecipes.get(position);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(INGREDIENTS, recipe.getIngredients());
-        bundle.putParcelableArrayList(STEPS, recipe.getSteps());
+        bundle.putParcelableArrayList(Utils.INGREDIENTS_EXTRA, recipe.getIngredients());
+        bundle.putParcelableArrayList(Utils.STEPS_EXTRA, recipe.getSteps());
 
         Intent intent = new Intent(this, RecipeActivity.class);
         intent.putExtras(bundle);
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(RECIPES, mRecipes);
+        outState.putParcelableArrayList(Utils.RECIPES_EXTRA, mRecipes);
         super.onSaveInstanceState(outState);
     }
 
