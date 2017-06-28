@@ -12,23 +12,23 @@ public class Step implements Parcelable {
     long id;
     String shortDescription;
     String description;
-    String videoUrl;
-    String thumbnailUrl;
+    String videoURL;
+    String thumbnailURL;
 
     public Step(Parcel in) {
         this.id = in.readLong();
         this.shortDescription = in.readString();
         this.description = in.readString();
-        this.videoUrl = in.readString();
-        this.thumbnailUrl = in.readString();
+        this.videoURL = in.readString();
+        this.thumbnailURL = in.readString();
     }
 
     public Step(long id, String shortDescription, String description, String videoUrl, String thumbnailUrl) {
         this.id = id;
         this.shortDescription = shortDescription;
         this.description = description;
-        this.videoUrl = videoUrl;
-        this.thumbnailUrl = thumbnailUrl;
+        this.videoURL = videoUrl;
+        this.thumbnailURL = thumbnailUrl;
     }
 
     public long getId() {
@@ -44,11 +44,11 @@ public class Step implements Parcelable {
     }
 
     public String getVideoUrl() {
-        return videoUrl;
+        return videoURL;
     }
 
     public String getThumbnailUrl() {
-        return thumbnailUrl;
+        return thumbnailURL;
     }
 
     @Override
