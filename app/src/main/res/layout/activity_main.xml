@@ -9,6 +9,15 @@
     android:paddingRight="@dimen/recipe_activity_margin"
     tools:context="com.gziolle.bakingapp.MainActivity">
 
+    <TextView
+        android:id="@+id/tvNoRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:visibility="gone"
+        tools:text="There are no recipes to display." />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipeRecyclerView"
         android:layout_width="match_parent"

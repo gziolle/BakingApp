@@ -7,4 +7,6 @@
 
     <string name="step_progress">%1$d / %2$d</string>
     <string name="no_video_for_step">There is no video in this step.</string>
+
+    <string name="no_recipes_to_display">There are no recipes to display. Please, check your internet connection.</string>
 </resources>

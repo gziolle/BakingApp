@@ -17,6 +17,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.gziolle.bakingapp.model.Recipe;
 import com.gziolle.bakingapp.util.NetworkUtils;
@@ -113,6 +115,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return (int) (dpWidth / 266);
     }
 
+    /*
+    * Displays a message when there are no movies to display.
+    * */
+    private void displayErrorMessages() {
+        TextView textView = (TextView) findViewById(R.id.tvNoRecipes);
+        textView.setVisibility(View.VISIBLE);
+        textView.setText(getString(R.string.no_recipes_to_display));
+    }
+
     @Override
     public Loader<ArrayList<Recipe>> onCreateLoader(int id, Bundle args) {
 
@@ -139,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mRecipes.addAll(data);
             mRecipeAdapter.notifyDataSetChanged();
         } else {
-
+            displayErrorMessages();
         }
     }
 
