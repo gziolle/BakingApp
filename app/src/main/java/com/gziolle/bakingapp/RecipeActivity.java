@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.gziolle.bakingapp.model.Ingredient;
+import com.gziolle.bakingapp.model.Recipe;
 import com.gziolle.bakingapp.model.Step;
 import com.gziolle.bakingapp.util.Utils;
 
@@ -40,8 +42,9 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
         mSteps = new ArrayList<>();
 
         if (bundle != null) {
-            mIngredients = bundle.getParcelableArrayList(Utils.INGREDIENTS_EXTRA);
-            mSteps = bundle.getParcelableArrayList(Utils.STEPS_EXTRA);
+            Recipe recipe = bundle.getParcelable(Utils.RECIPES_EXTRA);
+            mIngredients = recipe.getIngredients();
+            mSteps = recipe.getSteps();
         }
 
         if (findViewById(R.id.step_details_container) != null) {
@@ -85,8 +88,22 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
         int itemId = item.getItemId();
         switch (itemId) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                    // This activity is NOT part of this app's task, so create a new task
+                    // when navigating up, with a synthesized back stack.
+                    TaskStackBuilder.create(this)
+                            // Add all of this activity's parents to the back stack
+                            .addNextIntentWithParentStack(upIntent)
+                            // Navigate up to the closest parent
+                            .startActivities();
+                } else {
+                    // This activity is part of this app's task, so simply
+                    // navigate up to the logical parent activity.
+                    NavUtils.navigateUpTo(this, upIntent);
+                }
                 return true;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -101,7 +118,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
         mIngredients = savedInstanceState.getParcelableArrayList(Utils.INGREDIENTS_EXTRA);
         mSteps = savedInstanceState.getParcelableArrayList(Utils.STEPS_EXTRA);
     }

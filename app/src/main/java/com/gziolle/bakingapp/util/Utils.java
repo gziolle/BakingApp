@@ -14,6 +14,7 @@ import com.gziolle.bakingapp.model.Ingredient;
 public class Utils {
 
     public static final String RECIPES_EXTRA = "recipes";
+    public static final String RECIPE_EXTRA = "recipe";
     public static final String STEPS_EXTRA = "steps";
     public static final String INGREDIENTS_EXTRA = "ingredients";
     public static final String SELECTED_STEP_EXTRA = "selected_step";

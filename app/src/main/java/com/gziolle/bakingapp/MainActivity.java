@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gziolle.bakingapp.model.Ingredient;
 import com.gziolle.bakingapp.model.Recipe;
 import com.gziolle.bakingapp.util.NetworkUtils;
 import com.gziolle.bakingapp.util.Utils;
@@ -75,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onItemSelected(int position) {
         Recipe recipe = mRecipes.get(position);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(Utils.INGREDIENTS_EXTRA, recipe.getIngredients());
+        bundle.putParcelable(Utils.RECIPES_EXTRA, recipe);
 
-        updateIngredientWidget(recipe.getName(), recipe.getIngredients());
+        updateIngredientWidget(recipe);
 
         Intent intent = new Intent(this, RecipeActivity.class);
         intent.putExtras(bundle);
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
         mRecipes = savedInstanceState.getParcelableArrayList(Utils.RECIPES_EXTRA);
     }
 
@@ -129,12 +127,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /*
     * Updates all widgets when the user accesses a new recipe.
     * */
-    private void updateIngredientWidget(String recipeName, ArrayList<Ingredient> ingredients) {
+    private void updateIngredientWidget(Recipe recipe) {
         Intent intent = new Intent();
         intent.setAction(Utils.ACTION_UPDATE_WIDGET);
-        intent.putExtra(Utils.RECIPE_NAME_EXTRA, recipeName);
-        intent.putParcelableArrayListExtra(Utils.INGREDIENTS_EXTRA, ingredients);
-
+        intent.putExtra(Utils.RECIPE_EXTRA, recipe);
         sendBroadcast(intent);
     }
 

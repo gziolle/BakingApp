@@ -24,7 +24,6 @@ import java.util.ArrayList;
  * gziolle@gmail.com
  */
 
-//TODO Pick all steps that come from RecipeActivity and add them to the RecyclerView's adapter
 public class RecipeStepsFragment extends Fragment implements RecipeStepsAdapter.StepClickListener {
 
     private static final String LOG_TAG = RecipeStepsFragment.class.getSimpleName();

@@ -3,6 +3,7 @@ package com.gziolle.bakingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -63,6 +64,12 @@ public class StepDetailsActivity extends AppCompatActivity {
 
         final ImageView nextImageView = (ImageView) findViewById(R.id.nextButton);
         final ImageView previousImageView = (ImageView) findViewById(R.id.previousButton);
+
+        if (mCurrentStep == 0) {
+            previousImageView.setVisibility(View.INVISIBLE);
+        } else if (mCurrentStep == mSteps.size() - 1) {
+            nextImageView.setVisibility(View.INVISIBLE);
+        }
 
         if (nextImageView != null) {
             nextImageView.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +137,7 @@ public class StepDetailsActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         switch (itemId) {
             case android.R.id.home:
-                super.onBackPressed();
+                NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
 
