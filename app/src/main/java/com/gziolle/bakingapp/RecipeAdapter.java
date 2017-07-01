@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.gziolle.bakingapp.model.Recipe;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
         Recipe recipe = mRecipes.get(position);
+        Glide.with(mContext).load(recipe.getImageUrl()).error(R.drawable.food).fitCenter().into(holder.mRecipeImage);
         holder.mRecipeTitle.setText(recipe.getName());
     }
 
