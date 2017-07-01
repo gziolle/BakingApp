@@ -5,4 +5,10 @@
     <dimen name="recipe_grid_item_height">150dp</dimen>
     <dimen name="recipe_grid_item_margin">16dp</dimen>
     <dimen name="recipe_grid_item_width">@dimen/match_parent</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
 </resources>

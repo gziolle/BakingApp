@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gziolle.bakingapp.model.Ingredient;
 import com.gziolle.bakingapp.model.Recipe;
 import com.gziolle.bakingapp.util.NetworkUtils;
 import com.gziolle.bakingapp.util.Utils;
@@ -75,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Recipe recipe = mRecipes.get(position);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Utils.INGREDIENTS_EXTRA, recipe.getIngredients());
-        bundle.putParcelableArrayList(Utils.STEPS_EXTRA, recipe.getSteps());
+
+        updateIngredientWidget(recipe.getName(), recipe.getIngredients());
 
         Intent intent = new Intent(this, RecipeActivity.class);
         intent.putExtras(bundle);
@@ -124,6 +126,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         textView.setText(getString(R.string.no_recipes_to_display));
     }
 
+    /*
+    * Updates all widgets when the user accesses a new recipe.
+    * */
+    private void updateIngredientWidget(String recipeName, ArrayList<Ingredient> ingredients) {
+        Intent intent = new Intent();
+        intent.setAction(Utils.ACTION_UPDATE_WIDGET);
+        intent.putExtra(Utils.RECIPE_NAME_EXTRA, recipeName);
+        intent.putParcelableArrayListExtra(Utils.INGREDIENTS_EXTRA, ingredients);
+
+        sendBroadcast(intent);
+    }
+
     @Override
     public Loader<ArrayList<Recipe>> onCreateLoader(int id, Bundle args) {
 
@@ -133,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 showProgressDialog();
                 forceLoad();
             }
-
             @Override
             public ArrayList<Recipe> loadInBackground() {
                 return NetworkUtils.fetchRecipes();
@@ -147,6 +160,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mProgressDialog.hide();
         }
         if (data != null && data.size() != 0) {
+            if (mRecipes.size() != 0) {
+                mRecipes.clear();
+            }
             mRecipes.addAll(data);
             mRecipeAdapter.notifyDataSetChanged();
         } else {
@@ -157,5 +173,4 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader loader) {
     }
-
 }

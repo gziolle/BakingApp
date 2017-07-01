@@ -9,4 +9,10 @@
     <string name="no_video_for_step">There is no video in this step.</string>
 
     <string name="no_recipes_to_display">There are no recipes to display. Please, check your internet connection.</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+    <string name="last_recipe_visited_key">last_recipe</string>
+
+    <string name="empty_widget">Open a recipe in Baking App to load its ingredients here</string>
 </resources>

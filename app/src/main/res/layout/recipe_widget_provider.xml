@@ -1,0 +1,47 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/tvEmptyWidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:gravity="center"
+        android:text="@string/empty_widget" />
+
+    <RelativeLayout
+        android:id="@+id/widgetRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/appwidget_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/appwidget_text"
+            android:textColor="@android:color/black"
+            android:textSize="36sp"
+            android:textStyle="bold|italic"
+            tools:text="Nutella Pie" />
+
+        <TextView
+            android:id="@+id/tvIngredientList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appwidget_text"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:text="2.0 CUP of Graham Cracker crumbs \n6.0 TBLSP of unsalted butter, melted \n250.0 G of granulated sugar \n1.0 TSP of salt \n4.0 TSP of vanilla,divided \n680.0 G of cream cheese, softened \n3.0 UNIT of large whole eggs \n2.0 UNIT of large egg yolks \n250.0 G of heavy cream" />
+
+    </RelativeLayout>
+</FrameLayout>

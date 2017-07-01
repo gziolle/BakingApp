@@ -17,6 +17,9 @@ public class Utils {
     public static final String STEPS_EXTRA = "steps";
     public static final String INGREDIENTS_EXTRA = "ingredients";
     public static final String SELECTED_STEP_EXTRA = "selected_step";
+    public static final String RECIPE_NAME_EXTRA = "recipe_name";
+
+    public static final String ACTION_UPDATE_WIDGET = "com.gziolle.bakingapp.UPDATE_WIDGET";
 
     public static String formatIngredient(Context context, Ingredient ingredient) {
         return ingredient.getQuantity() + " " + ingredient.getMeasure() +
@@ -26,4 +29,5 @@ public class Utils {
     public static String formatProgressString(Context context, int current, int total) {
         return String.format(context.getString(R.string.step_progress, current, total));
     }
+
 }
