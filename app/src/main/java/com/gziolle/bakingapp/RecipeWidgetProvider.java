@@ -87,9 +87,10 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(LOG_TAG, "onReceive()");
-        super.onReceive(context, intent);
         if (Utils.ACTION_UPDATE_WIDGET.equals(intent.getAction())) {
+            Log.d(LOG_TAG, "ACTION_UPDATE_WIDGET");
             Recipe recipe = intent.getParcelableExtra(Utils.RECIPE_EXTRA);
+            Log.d(LOG_TAG, "name = " + recipe.getName());
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context.getApplicationContext());
             ComponentName thisWidget = new ComponentName(context.getApplicationContext(), RecipeWidgetProvider.class);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
@@ -103,6 +104,8 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
                 }
 
             }
+        } else {
+            super.onReceive(context, intent);
         }
     }
 }
