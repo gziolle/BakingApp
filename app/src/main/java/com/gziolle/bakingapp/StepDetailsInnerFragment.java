@@ -38,6 +38,9 @@ public class StepDetailsInnerFragment extends Fragment {
     private TextView mDescriptionTextView;
     private TextView noVideoTextView;
 
+    /*
+    * Default Constructor.
+    * */
     public StepDetailsInnerFragment() {
     }
 
@@ -48,7 +51,20 @@ public class StepDetailsInnerFragment extends Fragment {
         mExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
         noVideoTextView = (TextView) rootView.findViewById(R.id.tvNoVideo);
 
+        return rootView;
+    }
 
+    /*
+    * Adds the Step's description to the corresponding TextView
+    * */
+    private void addDescriptionToView(String description) {
+        if (description == null) return;
+        mDescriptionTextView.setText(description);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         if (mStep != null) {
             String videoUrl = mStep.getVideoUrl();
             if (videoUrl != null && !("").equals(videoUrl))
@@ -59,24 +75,20 @@ public class StepDetailsInnerFragment extends Fragment {
                     noVideoTextView.setVisibility(View.VISIBLE);
                 }
             }
-            if (rootView.findViewById(R.id.stepDescriptionCard) != null) {
-                mDescriptionTextView = (TextView) rootView.findViewById(R.id.tvStepDescription);
+            if (getActivity().findViewById(R.id.stepDescriptionCard) != null) {
+                mDescriptionTextView = (TextView) getActivity().findViewById(R.id.tvStepDescription);
                 addDescriptionToView(mStep.getDescription());
             }
         }
-        return rootView;
     }
 
-    private void addDescriptionToView(String description) {
-        if (description == null) return;
-        mDescriptionTextView.setText(description);
-    }
-
+    /*
+    * Initializes the resources used by the video player.
+    * */
     private void initializeVideoPlayer(String videoUrl) {
         if (videoUrl == null) return;
 
         if (mExoPlayer == null) {
-            //Creates a ExoPlayerView instance
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
@@ -101,6 +113,9 @@ public class StepDetailsInnerFragment extends Fragment {
         releasePlayer();
     }
 
+    /*
+    * Releases the resources used by the ExoPlayer instance
+    * */
     private void releasePlayer() {
         if (mExoPlayer != null) {
             mExoPlayer.stop();
@@ -115,6 +130,9 @@ public class StepDetailsInnerFragment extends Fragment {
         releasePlayer();
     }
 
+    /*
+    * Adds a Step to the fragment.
+    * */
     public void addStep(Step step) {
         mStep = step;
     }
