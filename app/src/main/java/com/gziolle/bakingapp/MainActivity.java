@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     /*
-        * Displays the progress dialog to inform the user that movies are being loaded.
-        * */
+     * Displays the progress dialog to inform the user that movies are being loaded.
+     * */
     private void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     /*
-        * Determines how many columns will be displayed in the RecycleView.
-        * */
+    * Determines how many columns will be displayed in the RecycleView.
+    * */
     public int calculateSpanCount() {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float dpWidth = metrics.widthPixels / metrics.density;

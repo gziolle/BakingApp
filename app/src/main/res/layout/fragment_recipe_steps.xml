@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvRecipeIngredientsTitle"
                 android:layout_marginTop="@dimen/recipe_grid_item_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
 
 
     <TextView
+        android:id="@+id/tvRecipeStepsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/recipe_steps"

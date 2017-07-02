@@ -16,4 +16,6 @@
     <string name="last_recipe_visited_key">last_recipe</string>
 
     <string name="empty_widget">Open a recipe in Baking App to load its ingredients here</string>
+
+    <string name="step_progress_test_string">2 / 7</string>
 </resources>
