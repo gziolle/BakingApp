@@ -59,15 +59,15 @@ public class StepDetailsActivity extends AppCompatActivity {
         StepDetailsInnerFragment fragment = new StepDetailsInnerFragment();
         fragment.addStep(mSteps.get(mCurrentStep));
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.innerContainer, fragment)
+                .replace(R.id.innerContainer, fragment)
                 .commit();
 
         final ImageView nextImageView = (ImageView) findViewById(R.id.nextButton);
         final ImageView previousImageView = (ImageView) findViewById(R.id.previousButton);
 
-        if (mCurrentStep == 0) {
+        if (mCurrentStep == 0 && previousImageView != null) {
             previousImageView.setVisibility(View.INVISIBLE);
-        } else if (mCurrentStep == mSteps.size() - 1) {
+        } else if (mCurrentStep == mSteps.size() - 1 && nextImageView != null) {
             nextImageView.setVisibility(View.INVISIBLE);
         }
 
