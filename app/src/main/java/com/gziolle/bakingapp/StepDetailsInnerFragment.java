@@ -95,6 +95,12 @@ public class StepDetailsInnerFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        releasePlayer();
+    }
+
     private void releasePlayer() {
         if (mExoPlayer != null) {
             mExoPlayer.stop();
