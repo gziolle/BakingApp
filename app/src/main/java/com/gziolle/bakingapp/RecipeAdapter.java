@@ -54,6 +54,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         Recipe recipe = mRecipes.get(position);
         Glide.with(mContext).load(recipe.getImageUrl()).error(R.drawable.food).fitCenter().into(holder.mRecipeImage);
         holder.mRecipeTitle.setText(recipe.getName());
+        String servings = mContext.getString(R.string.servings) + " " + recipe.getServings();
+        holder.mServings.setText(servings);
     }
 
     @Override
@@ -68,11 +70,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView mRecipeImage;
         private TextView mRecipeTitle;
+        private TextView mServings;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);
             mRecipeImage = (ImageView) itemView.findViewById(R.id.ivRecipeImage);
             mRecipeTitle = (TextView) itemView.findViewById(R.id.tvRecipeTitle);
+            mServings = (TextView) itemView.findViewById(R.id.tvServings);
             itemView.setOnClickListener(this);
         }
 
