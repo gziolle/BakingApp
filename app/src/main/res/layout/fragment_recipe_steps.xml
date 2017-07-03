@@ -41,7 +41,6 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-
     <TextView
         android:id="@+id/tvRecipeStepsTitle"
         android:layout_width="match_parent"
