@@ -1,3 +1,10 @@
+/*
+ * BakingApp
+ * Created by Guilherme Ziolle on 01/07/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
+
 package com.gziolle.bakingapp;
 
 import android.app.PendingIntent;
@@ -18,16 +25,23 @@ import com.gziolle.bakingapp.util.Utils;
 import java.util.ArrayList;
 
 /**
- * Implementation of App Widget functionality.
+ * Represents a widget in which the user can check the ingredients for a recipe.
  */
+
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
     private static final String LOG_TAG = RecipeWidgetProvider.class.getSimpleName();
 
+    /**
+     * Update a widget with new information.
+     *
+     * @param context          The application's context
+     * @param appWidgetManager An instance of {@link AppWidgetManager}
+     * @param appWidgetId      The widget's ID.
+     * @param recipe           The {@link Recipe} used to update the widget.
+     */
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                        int appWidgetId, Recipe recipe) {
-
-        Log.d(LOG_TAG, "updateAppWidget");
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget_provider);
@@ -35,7 +49,6 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         if (recipe != null) {
             String recipeName = recipe.getName();
             views.setTextViewText(R.id.appwidget_text, recipeName);
-            Log.d(LOG_TAG, "passou por aqui");
 
             ArrayList<Ingredient> ingredients = recipe.getIngredients();
             if (ingredients != null) {
@@ -86,9 +99,8 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(LOG_TAG, "onReceive()");
+        //If the user selected a different recipe, all widgets should be updated accordingly.
         if (Utils.ACTION_UPDATE_WIDGET.equals(intent.getAction())) {
-            Log.d(LOG_TAG, "ACTION_UPDATE_WIDGET");
             Recipe recipe = intent.getParcelableExtra(Utils.RECIPE_EXTRA);
             Log.d(LOG_TAG, "name = " + recipe.getName());
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context.getApplicationContext());

@@ -1,3 +1,10 @@
+/*
+ * BakingApp
+ * Created by Guilherme Ziolle on 24/06/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
+
 package com.gziolle.bakingapp;
 
 import android.content.Context;
@@ -19,9 +26,8 @@ import com.gziolle.bakingapp.util.Utils;
 import java.util.ArrayList;
 
 /**
- * BakingApp
- * Created by Guilherme Ziolle on 24/06/2017.
- * gziolle@gmail.com
+ * Fragment that hosts the recipe's steps and ingredients.
+ * Used toghether with {@link StepDetailsInnerFragment} and {@link RecipeActivity} to handle Tablet layouts.
  */
 
 public class RecipeStepsFragment extends Fragment implements RecipeStepsAdapter.StepClickListener {
@@ -33,6 +39,9 @@ public class RecipeStepsFragment extends Fragment implements RecipeStepsAdapter.
 
     OnStepClickListener mCallbackListener;
 
+    /**
+     * Interface to handle click events on a step.
+     */
     public interface OnStepClickListener {
         void onStepSelected(int position);
     }
@@ -79,12 +88,21 @@ public class RecipeStepsFragment extends Fragment implements RecipeStepsAdapter.
         addStepsToAdapter(steps);
     }
 
+    /**
+     * Adds steps to the Step list's adapter.
+     *
+     * @param steps A list of {@link Step}.
+     */
     public void addStepsToAdapter(ArrayList<Step> steps) {
         this.mSteps = steps;
         mAdapter.addSteps(mSteps);
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Adds all ingredients to the Ingredients list, which is a {@link TextView}.
+     * @param ingredients A list of {@link Ingredient}.
+     */
     public void addIngredientsToView(ArrayList<Ingredient> ingredients) {
         LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.ingredientLayout);
 

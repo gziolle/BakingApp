@@ -1,3 +1,10 @@
+/*
+ * BakingApp
+ * Created by Guilherme Ziolle on 20/06/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
+
 package com.gziolle.bakingapp;
 
 import android.content.Intent;
@@ -7,7 +14,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.gziolle.bakingapp.model.Ingredient;
@@ -17,6 +23,9 @@ import com.gziolle.bakingapp.util.Utils;
 
 import java.util.ArrayList;
 
+/**
+ * Hosts the steps and ingredients for a recipe.
+ */
 
 public class RecipeActivity extends AppCompatActivity implements RecipeStepsFragment.OnStepClickListener {
 
@@ -43,9 +52,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
         mSteps = new ArrayList<>();
 
         if (bundle != null) {
-            Log.d(LOG_TAG, "bundle != null");
             Recipe recipe = bundle.getParcelable(Utils.RECIPES_EXTRA);
-            Log.d(LOG_TAG, "recipe.name = " + recipe.getName());
             mIngredients = recipe.getIngredients();
             mSteps = recipe.getSteps();
         }

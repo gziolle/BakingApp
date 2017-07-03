@@ -1,3 +1,10 @@
+/*
+ * BakingApp
+ * Created by Guilherme Ziolle on 24/06/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
+
 package com.gziolle.bakingapp;
 
 import android.content.Intent;
@@ -16,11 +23,8 @@ import com.gziolle.bakingapp.util.Utils;
 
 import java.util.ArrayList;
 
-
 /**
- * BakingApp
- * Created by Guilherme Ziolle on 24/06/2017.
- * gziolle@gmail.com
+ * Hosts the steps details, such as the step's description and a video, if available.
  */
 
 public class StepDetailsActivity extends AppCompatActivity {
@@ -31,7 +35,6 @@ public class StepDetailsActivity extends AppCompatActivity {
 
     private ArrayList<Step> mSteps;
     private int mCurrentStep;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +74,7 @@ public class StepDetailsActivity extends AppCompatActivity {
             nextImageView.setVisibility(View.INVISIBLE);
         }
 
+        //If the user has reached the end of the Step list, the "next" button is hidden.
         if (nextImageView != null) {
             nextImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +92,7 @@ public class StepDetailsActivity extends AppCompatActivity {
                 }
             });
 
+            //If the user is in the beginning of the Step list, the "previous" button is hidden.
             previousImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -113,6 +118,9 @@ public class StepDetailsActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Replace the current {@link StepDetailsInnerFragment} with the previous or the next one.
+     */
     private void replaceStep() {
         TextView stepProgressTextView = (TextView) findViewById(R.id.tvStepProgress);
         stepProgressTextView.setText(

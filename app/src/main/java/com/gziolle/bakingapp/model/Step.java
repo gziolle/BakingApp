@@ -1,13 +1,19 @@
+/*
+ * BakingApp
+ * Created by Guilherme Ziolle on 20/06/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
+
 package com.gziolle.bakingapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * BakingApp
- * Created by Guilherme Ziolle on 20/06/2017.
- * gziolle@gmail.com
+ * Class that represents one of the recipe's steps.
  */
+
 public class Step implements Parcelable {
     long id;
     String shortDescription;

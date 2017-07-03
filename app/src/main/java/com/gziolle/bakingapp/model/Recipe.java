@@ -1,3 +1,10 @@
+/*
+ * BakingApp
+ * Created by Guilherme Ziolle on 20/06/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
+
 package com.gziolle.bakingapp.model;
 
 import android.os.Parcel;
@@ -6,16 +13,14 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 /**
- * BakingApp
- * Created by Guilherme Ziolle on 20/06/2017.
- * gziolle@gmail.com
+ * Class that represents a recipe retrieved from the Web Service.
  */
 
 public class Recipe implements Parcelable {
     private long id;
     private String name;
-    ArrayList<Ingredient> ingredients;
-    ArrayList<Step> steps;
+    private ArrayList<Ingredient> ingredients;
+    private ArrayList<Step> steps;
     private int servings;
     private String imageUrl;
 

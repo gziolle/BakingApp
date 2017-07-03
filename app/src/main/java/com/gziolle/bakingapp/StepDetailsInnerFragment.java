@@ -1,3 +1,9 @@
+/**
+ * BakingApp
+ * Created by Guilherme Ziolle on 27/06/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
 package com.gziolle.bakingapp;
 
 import android.net.Uri;
@@ -24,12 +30,13 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.gziolle.bakingapp.model.Step;
 
-/**
- * BakingApp
- * Created by Guilherme Ziolle on 27/06/2017.
- * gziolle@gmail.com
- */
 
+/*
+* Hosts the "Step Details" content:
+*  - Video Player (if available)
+*  - Image (if available)
+*  - Step Description
+* */
 public class StepDetailsInnerFragment extends Fragment {
 
     private Step mStep;

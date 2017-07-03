@@ -1,3 +1,10 @@
+/*
+ * BakingApp
+ * Created by Guilherme Ziolle on 24/06/2017.
+ * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
+ */
+
 package com.gziolle.bakingapp;
 
 import android.content.Context;
@@ -12,9 +19,7 @@ import com.gziolle.bakingapp.model.Step;
 import java.util.ArrayList;
 
 /**
- * BakingApp
- * Created by Guilherme Ziolle on 24/06/2017.
- * gziolle@gmail.com
+ * Represents an adapter for the list of steps.
  */
 
 public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.StepViewHolder> {
@@ -53,6 +58,9 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
         return mSteps.size();
     }
 
+    /**
+     * Helper class to access the steps's views
+     */
     public void addSteps(ArrayList<Step> steps) {
         mSteps = steps;
     }

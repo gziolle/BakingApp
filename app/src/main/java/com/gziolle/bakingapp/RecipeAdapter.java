@@ -1,10 +1,12 @@
-package com.gziolle.bakingapp;
-
-/**
+/*
  * BakingApp
  * Created by Guilherme Ziolle on 20/06/2017.
  * gziolle@gmail.com
+ * Copyright (c) 2017. All rights reserved
  */
+
+package com.gziolle.bakingapp;
+
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +21,9 @@ import com.gziolle.bakingapp.model.Recipe;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an adapter for the list of recipes.
+ */
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
@@ -57,10 +62,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         return mRecipes.size();
     }
 
-    Recipe getRecipe(int position) {
-        return mRecipes.get(position);
-    }
-
+    /**
+     * Helper class to access the recipes's views
+     */
     class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView mRecipeImage;
         private TextView mRecipeTitle;
