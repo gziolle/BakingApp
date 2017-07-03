@@ -35,6 +35,7 @@ public class StepDetailsActivity extends AppCompatActivity {
 
     private ArrayList<Step> mSteps;
     private int mCurrentStep;
+    private String mRecipeName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,16 +50,21 @@ public class StepDetailsActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mSteps = savedInstanceState.getParcelableArrayList(Utils.STEPS_EXTRA);
             mCurrentStep = savedInstanceState.getInt(Utils.SELECTED_STEP_EXTRA);
+            mRecipeName = savedInstanceState.getString(Utils.RECIPE_NAME_EXTRA);
         } else {
             Intent intent = getIntent();
             if (intent != null) {
                 if (intent.hasExtra(Utils.STEPS_EXTRA) && intent.hasExtra(Utils.SELECTED_STEP_EXTRA)) {
                     mSteps = intent.getParcelableArrayListExtra(Utils.STEPS_EXTRA);
                     mCurrentStep = intent.getIntExtra(Utils.SELECTED_STEP_EXTRA, 0);
+                    mRecipeName = intent.getStringExtra(Utils.RECIPE_NAME_EXTRA);
                 }
             }
         }
 
+        if (actionBar != null) {
+            actionBar.setTitle(mRecipeName);
+        }
         StepDetailsInnerFragment fragment = new StepDetailsInnerFragment();
         fragment.addStep(mSteps.get(mCurrentStep));
         getSupportFragmentManager().beginTransaction()
@@ -136,6 +142,7 @@ public class StepDetailsActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(Utils.STEPS_EXTRA, mSteps);
         outState.putInt(Utils.SELECTED_STEP_EXTRA, mCurrentStep);
+        outState.putString(Utils.RECIPE_NAME_EXTRA, mRecipeName);
         super.onSaveInstanceState(outState);
 
     }

@@ -31,6 +31,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
 
     private static final String LOG_TAG = RecipeActivity.class.getSimpleName();
 
+    private Recipe mRecipe;
     private ArrayList<Step> mSteps;
     private ArrayList<Ingredient> mIngredients;
     private boolean mTwoPane;
@@ -48,13 +49,19 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        mIngredients = new ArrayList<>();
         mSteps = new ArrayList<>();
 
         if (bundle != null) {
-            Recipe recipe = bundle.getParcelable(Utils.RECIPES_EXTRA);
-            mIngredients = recipe.getIngredients();
-            mSteps = recipe.getSteps();
+            mRecipe = bundle.getParcelable(Utils.RECIPES_EXTRA);
+            mIngredients = mRecipe.getIngredients();
+            mSteps = mRecipe.getSteps();
+            if (actionBar != null) {
+                actionBar.setTitle(mRecipe.getName());
+            }
+        }
+
+        if (mIngredients == null) {
+            mIngredients = new ArrayList<>();
         }
 
         if (findViewById(R.id.step_details_container) != null) {
@@ -89,6 +96,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
             Intent intent = new Intent(this, StepDetailsActivity.class);
             intent.putParcelableArrayListExtra(Utils.STEPS_EXTRA, mSteps);
             intent.putExtra(Utils.SELECTED_STEP_EXTRA, position);
+            intent.putExtra(Utils.RECIPE_NAME_EXTRA, mRecipe.getName());
             startActivity(intent);
         }
     }
