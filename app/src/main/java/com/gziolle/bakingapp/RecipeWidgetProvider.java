@@ -71,7 +71,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
             intent = new Intent(context, MainActivity.class);
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.widgetLayout, pendingIntent);
 
         // Instruct the widget manager to update the widget
