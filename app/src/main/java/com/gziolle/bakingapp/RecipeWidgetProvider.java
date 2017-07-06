@@ -64,11 +64,13 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
             bundle.putParcelable(Utils.RECIPES_EXTRA, recipe);
 
             intent = new Intent(context, RecipeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtras(bundle);
 
         } else {
             views.setTextViewText(R.id.appwidget_text, context.getString(R.string.baking_app));
-            intent = new Intent(context, MainActivity.class);
+            intent = new Intent(context, RecipeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
